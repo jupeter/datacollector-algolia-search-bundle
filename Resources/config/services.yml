@@ -1,0 +1,34 @@
+services:
+    algolia_data_collector.client_data_collector:
+        class: Jupeter\DataCollectorAlgoliaSearchBundle\DataCollector\ClientDataCollector
+        public: false
+        tags:
+            -
+                name: data_collector
+                template: "@DataCollectorAlgoliaSearch/algolia.html.twig"
+                id: "algolia_data_collector.client_data_collector"
+
+    algolia_data_collector.client:
+        class: Jupeter\DataCollectorAlgoliaSearchBundle\Debug\DebugClient
+        arguments:
+            - "%algolia.application_id%"
+            - "%algolia.api_key%"
+        calls:
+            - [setDataCollector, ["@algolia_data_collector.client_data_collector"]]
+
+    algolia.indexer:
+        class: Jupeter\DataCollectorAlgoliaSearchBundle\Debug\DebugIndexer
+        calls:
+            - [setEnvironment, ["%kernel.environment%"]]
+            - [setIndexNamePrefix, ["%algolia.index_name_prefix%"]]
+            - [setApiSettings, ["%algolia.application_id%", "%algolia.api_key%", "%algolia.connection_timeout%"]]
+            - [setClient, ["@algolia_data_collector.client"]]
+
+    algolia_data_collector.debug_client:
+        class: Jupeter\DataCollectorAlgoliaSearchBundle\Debug\DebugClient
+        arguments:
+            - "%algolia.application_id%"
+            - "%algolia.api_key%"
+        calls:
+            - [disableRequests, ["%algolia_data_collector.disable_requests%"]]
+            - [setStopwatch, ["@debug.stopwatch"]]

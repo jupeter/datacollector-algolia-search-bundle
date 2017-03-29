@@ -1,0 +1,8 @@
+vendor
+composer.phar
+Tests/config/parameters.yml
+Tests/cache
+Tests/coverage
+composer.lock
+.idea
+
