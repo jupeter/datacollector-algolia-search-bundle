@@ -1,0 +1,73 @@
+<?php
+
+/*
+ * Copyright (c) 2015 Piotr Plenik
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$header = <<<'EOF'
+Copyright (c) 2015 Piotr Plenik
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+EOF;
+
+$finder = Finder::create()
+        ->in(__DIR__.'/');
+
+return Config::create()
+                ->setUsingCache(true)
+                ->setRiskyAllowed(true)
+                ->setRules([
+                    '@Symfony'                     => true,
+                    '@Symfony:risky'               => true,
+                    'psr4'                         => true,
+                    'array_syntax'                 => ['syntax' => 'short'],
+                    'header_comment'               => ['header' => $header],
+                    'phpdoc_order'                 => true,
+                    'ordered_imports'              => true,
+                    'no_useless_else'              => true,
+                    'no_useless_return'            => true,
+                    'binary_operator_spaces'       => [
+                        'align_equals'       => true,
+                        'align_double_arrow' => true,
+                    ],
+                    'braces'                       => true,
+                    'no_blank_lines_after_phpdoc'  => true,
+                    'phpdoc_var_without_name'      => false,
+                ])->setFinder($finder);

@@ -5,4 +5,4 @@ Tests/cache
 Tests/coverage
 composer.lock
 .idea
-
+.php_cs.cache
