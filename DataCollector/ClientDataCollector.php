@@ -54,7 +54,7 @@ class ClientDataCollector extends DataCollector
      */
     public function getTransactions()
     {
-        return $this->data['transactions'];
+        return isset($this->data['transactions']) ? $this->data['transactions'] : [];
     }
 
     /**
