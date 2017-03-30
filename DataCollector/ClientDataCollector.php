@@ -87,7 +87,7 @@ class ClientDataCollector extends DataCollector
     }
 
     /**
-     * Add translation
+     * Add translation.
      *
      * @param string $id
      * @param string $transaction

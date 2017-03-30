@@ -117,14 +117,14 @@ class DebugClient extends Client implements DebugClientInterface
             $this->stopwatch->stop('algolia_transaction');
         }
 
-        if($this->dataCollector) {
+        if ($this->dataCollector) {
             $this->dataCollector->addTransaction(
                 $transactionId,
                 [
-                    'mocked' => $this->disableRequests,
-                    'request' => $request,
+                    'mocked'   => $this->disableRequests,
+                    'request'  => $request,
                     'response' => $response,
-                    'ms' => round($time * 1000),
+                    'ms'       => round($time * 1000),
                 ]
             );
         }
