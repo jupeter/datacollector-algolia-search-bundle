@@ -1,10 +1,14 @@
 # Data Collector for Algolia Search Bundle
 
-## Installation
+![Data Collector for Algolia Search Bundle](https://raw.githubusercontent.com/jupeter/datacollector-algolia-search-bundle/master/docs/profiler.png)
+
+## Install using composer
 
     composer require --dev jupeter/datacollector-algolia-search-bundle
     
-## Add new Bundle to AppKernel
+## Register the bundle
+
+Add ``Jupeter\DataCollectorAlgoliaSearchBundle\DataCollectorAlgoliaSearchBundle()`` to your application Kernel:
 
     class AppKernel extends Kernel
     {
