@@ -48,9 +48,9 @@ class DebugClient extends Client implements DebugClientInterface
     private $stopwatch;
 
     /**
-     * @var ClientDataCollector
+     * @var ClientDataCollector|false
      */
-    private $dataCollector;
+    private $dataCollector = false;
 
     /**
      * @param bool $disable
@@ -116,12 +116,18 @@ class DebugClient extends Client implements DebugClientInterface
         if ($this->stopwatch) {
             $this->stopwatch->stop('algolia_transaction');
         }
-        $this->dataCollector->addTransaction($transactionId, [
-            'mocked'   => $this->disableRequests,
-            'request'  => $request,
-            'response' => $response,
-            'ms'       => round($time * 1000),
-        ]);
+
+        if($this->dataCollector) {
+            $this->dataCollector->addTransaction(
+                $transactionId,
+                [
+                    'mocked' => $this->disableRequests,
+                    'request' => $request,
+                    'response' => $response,
+                    'ms' => round($time * 1000),
+                ]
+            );
+        }
 
         return $response;
     }
