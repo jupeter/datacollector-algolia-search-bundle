@@ -96,4 +96,11 @@ class ClientDataCollector extends DataCollector
     {
         $this->transactions[$id] = $transaction;
     }
+    
+    /**
+     * Reset DataCollector to initial state.
+     */
+    public function reset() {
+        $this->transactions = [];   
+    }
 }
